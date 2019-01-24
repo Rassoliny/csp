@@ -6,8 +6,6 @@
     {% block title %}
             {{ title|capfirst }}
     {% endblock %}
-{#<title>Corporate Software Portal</title>#}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'softwareapp/css/style.css' %}"/>#}
         <link rel="stylesheet" type="text/css" href="{% static 'softwareapp/css/style.css' %}"/>
 
 </head>
@@ -17,9 +15,10 @@
         <div class="header">
             {% include 'softwareapp/includes/inc_menu.html' %}
         </div>
-    </div>
-{% block content %}
 
-{% endblock %}
+    {% block content %}
+
+    {% endblock %}
+    </div>
 </body>
 </html>
