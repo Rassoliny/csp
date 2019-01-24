@@ -14,7 +14,7 @@ def catalog_soft(request):
     query = Category.objects.all()
     return render(request, 'softwareapp/catalog_soft.html', {'results': query})
 
-
+#
 def category_create(request):
     title = 'Создание категории'
     # Вывод формы для редактирования
