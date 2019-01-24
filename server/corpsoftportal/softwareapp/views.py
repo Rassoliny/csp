@@ -40,3 +40,5 @@ def category_create(request):
     return render(request, 'softwareapp/category_creation.html', content)
 
 
+def create_form(request):
+    return render(request, 'softwareapp/category_creation.html')
