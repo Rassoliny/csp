@@ -1,0 +1,28 @@
+{% extends 'softwareapp/base.html' %}
+
+
+{% load static %}
+
+
+{% block page_title %}
+Каталог софта
+{% endblock %}
+
+{% block content %}
+<h2>Каталог</h2>
+
+<div class="product_catalog">
+
+            <ul>
+                {% for itm in results %}
+
+                <li>
+                        {{ itm.title }}
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    <a href="{% url 'softwareapp:category_creation' %}">Создание новой категории софта</a>
+
+{% endblock %}
