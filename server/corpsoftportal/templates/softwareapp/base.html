@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <div class="header">
-            {% include 'softwareapp/includes/inc_menu.html' %}
+            {% block menu %}
+                {% include 'softwareapp/includes/inc_menu.html' %}
+            {% endblock %}
         </div>
-
     {% block content %}
-
-    {% endblock %}
+        {% endblock %}
     </div>
 </body>
 </html>

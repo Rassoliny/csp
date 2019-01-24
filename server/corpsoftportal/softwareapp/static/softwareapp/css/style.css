@@ -11,12 +11,11 @@
 }
 .links-menu {
 	margin: auto 0px;
-	position: absolute;
+	position: relative;
 }
 
 .links-menu ul{
 	display: flex;
-	position: relative;
 }
 
 .links-menu li {
