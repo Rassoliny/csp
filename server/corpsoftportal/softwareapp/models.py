@@ -36,3 +36,12 @@ class LicenseType(models.Model):
 
     class Meta:
         verbose_name = "Типы лицензий"
+        verbose_name_plural = "Типы лицензий"
+
+
+class LicenseTerm(models.Model):
+    name = models.CharField(max_length=32)
+
+    class Meta:
+        verbose_name = "Срок действия лицензии"
+        verbose_name_plural = "Срок действия лицензии"
