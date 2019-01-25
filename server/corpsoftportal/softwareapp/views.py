@@ -11,8 +11,16 @@ def main(request):
 
 
 def catalog_soft(request):
-    query = Software.objects.all()
-    return render(request, 'softwareapp/catalog_soft.html', {'results': query})
+    categories = Software.objects.all()
+    software = Software.objects.all()
+
+    content = {
+        'categories': categories,
+        'software': software
+    }
+
+
+    return render(request, 'softwareapp/catalog_soft.html', content)
 
 
 def category_create(request):
