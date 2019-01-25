@@ -7,8 +7,8 @@
 
 
 {% block content %}
-    <h2>Создание новой категории софта</h2>
-    <form class="form-horizontal" action="{% url 'softwareapp:category_creation' %}" method="post" enctype="multipart/form-data">
+    <h2>Создание нового объекта</h2>
+    <form class="form-horizontal" action="{% url 'softwareapp:software_creation' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <br>

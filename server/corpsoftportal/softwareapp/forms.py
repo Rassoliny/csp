@@ -16,10 +16,11 @@ class CategoryCreateForm(forms.ModelForm):
 class SofwareCreateForm(forms.ModelForm):
     class Meta:
         model = Software
-        fields = ('name', 'category')
+        fields = ('name', 'category', 'license_term')
 
     def __init__(self, *args, **kwargs):
         super(SofwareCreateForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
 

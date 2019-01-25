@@ -8,21 +8,40 @@
 Каталог софта
 {% endblock %}
 
+{% block inc_menu %}
+    {% include 'softwareapp/includes/inc_menu_soft_catalog.html' %}
+{% endblock %}
+
+
 {% block content %}
-<h2>Каталог</h2>
+<h2>Категории</h2>
 
 <div class="product_catalog">
 
             <ul>
-                {% for itm in results %}
+                {% for itm in categories %}
 
                 <li>
-                        {{ itm.title }}
+                        {{ itm.name }}
                 </li>
                 {% endfor %}
 
             </ul>
         </div>
-    <a href="{% url 'softwareapp:category_creation' %}">Создание новой категории софта</a>
+
+<h2>Софт</h2>
+
+<div class="product_catalog">
+
+            <ul>
+                {% for itm in software %}
+
+                <li>
+                        {{ itm.name }}
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
 
 {% endblock %}

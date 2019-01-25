@@ -6,8 +6,6 @@
     {% block title %}
             {{ title|capfirst }}
     {% endblock %}
-{#<title>Corporate Software Portal</title>#}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'softwareapp/css/style.css' %}"/>#}
         <link rel="stylesheet" type="text/css" href="{% static 'softwareapp/css/style.css' %}"/>
 
 </head>
@@ -15,11 +13,20 @@
 <body>
     <div class="container">
         <div class="header">
-            {% include 'softwareapp/includes/inc_menu.html' %}
+            {% block menu %}
+                {% include 'softwareapp/includes/inc_menu.html' %}
+            {% endblock %}
         </div>
-    </div>
-{% block content %}
+            {% block inc_menu %}
+            {% endblock %}
 
-{% endblock %}
+
+    {% block content %}
+        <h2>Проблемы</h2>
+        Список полученного платного ПО, который не назначен для установки на указанный компьютер
+        <h2>Нужно классифицировать</h2>
+        Список полученного с хостов софта, требующий классификации
+        {% endblock %}
+    </div>
 </body>
 </html>
