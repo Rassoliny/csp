@@ -16,7 +16,7 @@ class CategoryCreateForm(forms.ModelForm):
 class SofwareCreateForm(forms.ModelForm):
     class Meta:
         model = Software
-        fields = ('name', 'category')
+        fields = ('name', 'category', 'license_term')
 
     def __init__(self, *args, **kwargs):
         super(SofwareCreateForm, self).__init__(*args, **kwargs)
