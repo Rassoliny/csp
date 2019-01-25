@@ -11,7 +11,7 @@ def main(request):
 
 
 def catalog_soft(request):
-    query = Category.objects.all()
+    query = Software.objects.all()
     return render(request, 'softwareapp/catalog_soft.html', {'results': query})
 
 
@@ -42,7 +42,7 @@ def software_create(request):
         form = SofwareCreateForm(request.POST)
         if form.is_valid():
             software = Software(name=request.POST['name'],
-                                license_type=LicenseType.objects.get(id=request.POST['license_type']),
+                                category=Category.objects.get(id=request.POST['category']),
                                 license_term=LicenseTerm.objects.get(id=request.POST['license_term']))
             software.save()
 
