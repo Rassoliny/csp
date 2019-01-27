@@ -6,6 +6,7 @@ from django.db import models
 class Warehouse(models.Model):
     """class license type"""
     name = models.CharField(max_length=128)
+    warehouse_type = models.CharField(max_length=32, default='Склад')
 
     class Meta:
         verbose_name = "Склад"
