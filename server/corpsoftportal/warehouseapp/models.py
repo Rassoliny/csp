@@ -18,8 +18,9 @@ class WarehouseType(models.Model):
 class Warehouse(models.Model):
     """class license type"""
     name = models.CharField(max_length=128)
-    warehouse_type = models.CharField(max_length=32, default='Склад')
-
+    # warehouse_type = models.CharField(max_length=32, default='Склад')
+    warehouse_type = models.ForeignKey(
+        WarehouseType, verbose_name='Тип склада', on_delete=models.CASCADE, blank=True)
     class Meta:
         verbose_name = "Склад"
         verbose_name_plural = "Склады"
