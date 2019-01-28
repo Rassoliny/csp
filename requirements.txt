@@ -1,0 +1,4 @@
+django
+win32com
+wmi
+winreg
