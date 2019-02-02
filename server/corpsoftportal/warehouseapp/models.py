@@ -1,7 +1,8 @@
 from django.db import models
-
-# Create your models here.
-
+from django.apps import apps
+# from softwareapp.models import Software
+# # Create your models here.
+# Software = apps.get_model('sofwareapp', 'Software')
 
 class WarehouseType(models.Model):
     """class license type"""
@@ -26,5 +27,4 @@ class Warehouse(models.Model):
 
     def __str__(self):
         return self.name
-
 

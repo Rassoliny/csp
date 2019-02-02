@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from warehouseapp.models import Warehouse, WarehouseType
 from warehouseapp.forms import WarehouseCreateForm
-
 # Create your views here.
 
 
@@ -30,3 +29,4 @@ def warehouse_create(request):
     }
 
     return render(request, 'warehouseapp/warehouse_creation.html', content)
+

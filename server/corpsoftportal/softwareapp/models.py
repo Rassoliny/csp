@@ -55,3 +55,14 @@ class Software(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Transfer(models.Model):
+    """class transfer"""
+    source = models.ForeignKey(Warehouse, related_name='sender', on_delete=models.CASCADE, verbose_name='Отправитель')
+    destination = models.ForeignKey(Warehouse, related_name='reciever', on_delete=models.CASCADE, verbose_name='Получатель')
+    software = models.ForeignKey(Software, verbose_name='Передаваемый софт', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Проводка"
+        verbose_name_plural = "Проводки"
