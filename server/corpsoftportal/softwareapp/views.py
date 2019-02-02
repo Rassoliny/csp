@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from softwareapp.models import Category, LicenseType, Software, LicenseTerm
-from softwareapp.forms import CategoryCreateForm, SofwareCreateForm
+from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
+from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCreateForm
+from warehouseapp.models import Warehouse
 
 # Create your views here.
 
@@ -65,3 +66,25 @@ def software_create(request):
     }
 
     return render(request, 'softwareapp/software_creation.html', content)
+
+
+def transfer_create(request):
+    title = 'Проводка'
+    # Вывод формы для редактирования
+    if request.method == "POST":
+        form = TransferCreateForm(request.POST)
+        if form.is_valid():
+            software = Software.objects.get(id=request.POST['software'])
+            software.owner = Warehouse.objects.get(id=request.POST['destination'])
+            software.save()
+
+            return HttpResponseRedirect(reverse('softwareapp:main'))
+    else:
+        form = TransferCreateForm()
+
+    content = {
+        'title': title,
+        'form': form
+    }
+
+    return render(request, 'softwareapp/transfer_creation.html', content)
