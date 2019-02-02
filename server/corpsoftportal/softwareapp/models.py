@@ -48,6 +48,8 @@ class Software(models.Model):
     name = models.CharField("Название", max_length=128)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True)
     license_term = models.ForeignKey(LicenseTerm, verbose_name='Срок лицензии', on_delete=models.CASCADE, blank=True)
+    license_key = models.TextField("Лицензионный ключ", max_length=128, blank=True)
+
 
     def __str__(self):
         return self.name

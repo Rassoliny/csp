@@ -51,7 +51,8 @@ def software_create(request):
         if form.is_valid():
             software = Software(name=request.POST['name'],
                                 category=Category.objects.get(id=request.POST['category']),
-                                license_term=LicenseTerm.objects.get(id=request.POST['license_term']))
+                                license_term=LicenseTerm.objects.get(id=request.POST['license_term']),
+                                license_key=request.POST['license_key'])
             software.save()
 
             return HttpResponseRedirect(reverse('softwareapp:main'))
