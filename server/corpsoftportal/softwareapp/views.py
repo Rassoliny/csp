@@ -8,7 +8,11 @@ from warehouseapp.models import Warehouse
 
 
 def main(request):
-    return render(request, 'softwareapp/base.html', {})
+    unclassifed = Software.objects.filter(owner=3)
+    content = {
+        'unclassifed': unclassifed,
+    }
+    return render(request, 'softwareapp/base.html', content)
 
 
 def catalog_soft(request):
