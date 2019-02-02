@@ -1,4 +1,5 @@
 from django.db import models
+from warehouseapp.models import Warehouse
 
 
 # Create your models here.
@@ -49,7 +50,8 @@ class Software(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True)
     license_term = models.ForeignKey(LicenseTerm, verbose_name='Срок лицензии', on_delete=models.CASCADE, blank=True)
     license_key = models.TextField("Лицензионный ключ", max_length=128, blank=True)
-
+    # 3 - склад нераспределенного ПО
+    owner = models.ForeignKey(Warehouse, verbose_name='Владелец', on_delete=models.CASCADE, default=3)
 
     def __str__(self):
         return self.name
