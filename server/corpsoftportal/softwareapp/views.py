@@ -1,13 +1,18 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from softwareapp.models import Category, LicenseType, Software, LicenseTerm
-from softwareapp.forms import CategoryCreateForm, SofwareCreateForm
+from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
+from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCreateForm
+from warehouseapp.models import Warehouse
 
 # Create your views here.
 
 
 def main(request):
-    return render(request, 'softwareapp/base.html', {})
+    unclassifed = Software.objects.filter(owner=3)
+    content = {
+        'unclassifed': unclassifed,
+    }
+    return render(request, 'softwareapp/base.html', content)
 
 
 def catalog_soft(request):
@@ -51,7 +56,8 @@ def software_create(request):
         if form.is_valid():
             software = Software(name=request.POST['name'],
                                 category=Category.objects.get(id=request.POST['category']),
-                                license_term=LicenseTerm.objects.get(id=request.POST['license_term']))
+                                license_term=LicenseTerm.objects.get(id=request.POST['license_term']),
+                                license_key=request.POST['license_key'])
             software.save()
 
             return HttpResponseRedirect(reverse('softwareapp:main'))
@@ -64,3 +70,25 @@ def software_create(request):
     }
 
     return render(request, 'softwareapp/software_creation.html', content)
+
+
+def transfer_create(request):
+    title = 'Проводка'
+    # Вывод формы для редактирования
+    if request.method == "POST":
+        form = TransferCreateForm(request.POST)
+        if form.is_valid():
+            software = Software.objects.get(id=request.POST['software'])
+            software.owner = Warehouse.objects.get(id=request.POST['destination'])
+            software.save()
+
+            return HttpResponseRedirect(reverse('softwareapp:main'))
+    else:
+        form = TransferCreateForm()
+
+    content = {
+        'title': title,
+        'form': form
+    }
+
+    return render(request, 'softwareapp/transfer_creation.html', content)

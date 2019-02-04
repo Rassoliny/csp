@@ -1,4 +1,5 @@
 from django.db import models
+from warehouseapp.models import Warehouse
 
 
 # Create your models here.
@@ -48,6 +49,20 @@ class Software(models.Model):
     name = models.CharField("Название", max_length=128)
     category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, blank=True)
     license_term = models.ForeignKey(LicenseTerm, verbose_name='Срок лицензии', on_delete=models.CASCADE, blank=True)
+    license_key = models.TextField("Лицензионный ключ", max_length=128, blank=True)
+    # 3 - склад нераспределенного ПО
+    owner = models.ForeignKey(Warehouse, verbose_name='Владелец', on_delete=models.CASCADE, default=3)
 
     def __str__(self):
         return self.name
+
+
+class Transfer(models.Model):
+    """class transfer"""
+    source = models.ForeignKey(Warehouse, related_name='sender', on_delete=models.CASCADE, verbose_name='Отправитель')
+    destination = models.ForeignKey(Warehouse, related_name='reciever', on_delete=models.CASCADE, verbose_name='Получатель')
+    software = models.ForeignKey(Software, verbose_name='Передаваемый софт', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Проводка"
+        verbose_name_plural = "Проводки"
