@@ -100,4 +100,5 @@ def transfer_create(request):
 def reciever(request):
     if request.method == "POST":
         data = json.loads(request.body)
+        print(data)
     return render(request, 'softwareapp/base.html', {})
