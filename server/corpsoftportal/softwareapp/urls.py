@@ -8,5 +8,6 @@ urlpatterns = [
     path('category_creation', sofwareapp.category_create, name='category_creation'),
     path('software_creation', sofwareapp.software_create, name='software_creation'),
     path('transfer_creation', sofwareapp.transfer_create, name='transfer_creation'),
+    path('reciever', sofwareapp.reciever, name='reciever'),
     path('', sofwareapp.main, name='main'),
 ]

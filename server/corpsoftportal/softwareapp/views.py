@@ -1,8 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
 from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCreateForm
 from warehouseapp.models import Warehouse
+import json
 
 # Create your views here.
 
@@ -92,3 +94,10 @@ def transfer_create(request):
     }
 
     return render(request, 'softwareapp/transfer_creation.html', content)
+
+
+@csrf_exempt
+def reciever(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+    return render(request, 'softwareapp/base.html', {})
