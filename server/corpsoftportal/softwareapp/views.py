@@ -116,7 +116,8 @@ def reciever(request):
                 software_name = Software.objects.get(name=software['DisplayName'],
                                                      owner_id=Warehouse.objects.get(name=data['machine_name']))
             except:
-                # print(Warehouse.objects.get(name=data['machine_name']))
+                if software['DisplayName'] == '':
+                    continue
                 software_name = Software(name=software['DisplayName'],
                                          owner_id=Warehouse.objects.get(name=data['machine_name']).id,
                                          category_id=Category.objects.get(name='Unknown').id,
