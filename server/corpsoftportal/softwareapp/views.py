@@ -6,6 +6,7 @@ from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCre
 from warehouseapp.models import Warehouse, WarehouseType
 import json
 
+
 # Create your views here.
 
 
@@ -26,7 +27,6 @@ def catalog_soft(request):
         'software': software
     }
 
-
     return render(request, 'softwareapp/catalog_soft.html', content)
 
 
@@ -36,7 +36,8 @@ def category_create(request):
     if request.method == "POST":
         form = CategoryCreateForm(request.POST)
         if form.is_valid():
-            category = Category(name=request.POST['name'], license_type=LicenseType.objects.get(id=request.POST['license_type']))
+            category = Category(name=request.POST['name'],
+                                license_type=LicenseType.objects.get(id=request.POST['license_type']))
             category.save()
             return HttpResponseRedirect(reverse('softwareapp:main'))
     else:
@@ -106,6 +107,17 @@ def reciever(request):
             host = Warehouse(name=data['machine_name'], warehouse_type=WarehouseType.objects.get(id=2))
             host.save()
         print(data['username'])
-        print(data['soft'])
+        # print(data['soft'])
+        for software in data['soft']:
+            try:
+                software_name = Software.objects.get(name=software['DisplayName'],
+                                                     owner_id=Warehouse.objects.get(name=data['machine_name']))
+            except:
+                # print(Warehouse.objects.get(name=data['machine_name']))
+                software_name = Software(name=software['DisplayName'],
+                                         owner_id=Warehouse.objects.get(name=data['machine_name']).id,
+                                         category_id=Category.objects.get(name='Unknown').id,
+                                         license_term_id=LicenseTerm.objects.get(name='Unknown').id)
+                software_name.save()
 
     return render(request, 'softwareapp/base.html', {})
