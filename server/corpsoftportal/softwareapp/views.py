@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
-from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCreateForm
+from softwareapp.forms import CategoryCreateForm, SofwareForm, TransferCreateForm
 from warehouseapp.models import Warehouse, WarehouseType
 import json
 
@@ -58,7 +58,7 @@ def software_create(request):
     title = 'Создание категории'
     # Вывод формы для редактирования
     if request.method == "POST":
-        form = SofwareCreateForm(request.POST)
+        form = SofwareForm(request.POST)
         if form.is_valid():
             software = Software(name=request.POST['name'],
                                 category=Category.objects.get(id=request.POST['category']),
@@ -68,7 +68,7 @@ def software_create(request):
 
             return HttpResponseRedirect(reverse('softwareapp:main'))
     else:
-        form = SofwareCreateForm()
+        form = SofwareForm()
 
     content = {
         'title': title,
@@ -124,3 +124,22 @@ def reciever(request):
                 software_name.save()
 
     return render(request, 'softwareapp/base.html', {})
+
+
+def software_details(request, software_id):
+    """Вывод полной информации об ящике"""
+    instance = Software.objects.get(id=software_id)
+
+    #Вывод формы для редактирования
+    if request.method == "POST":
+        form = SofwareForm(request.POST, instance=instance)
+        if form.is_valid():
+            pass
+    else:
+        form = SofwareForm(instance=instance)
+
+    content = {
+        'itm': instance,
+        'form': form
+    }
+    return render(request, 'softwareapp/detail.html', content)

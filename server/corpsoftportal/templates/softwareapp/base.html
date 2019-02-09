@@ -40,11 +40,13 @@
         <h2>Требуется классифицировать</h2>
             <table class="output">
                 <tr>
+                   <td>Softname ID</td>
                    <td>Softname</td>
                    <td>Owner</td>
                </tr>
                 {% for itm in unknown_category %}
                 <tr>
+                   <td>{{ itm.id }}</td>
                    <td>{{ itm.name }}</td>
                    <td>{{ itm.owner }}</td>
                 </tr>

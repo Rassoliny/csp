@@ -9,5 +9,6 @@ urlpatterns = [
     path('software_creation', sofwareapp.software_create, name='software_creation'),
     path('transfer_creation', sofwareapp.transfer_create, name='transfer_creation'),
     path('reciever', sofwareapp.reciever, name='reciever'),
+    path('software_details/<int:software_id>', sofwareapp.software_details, name='software_details'),
     path('', sofwareapp.main, name='main'),
 ]
