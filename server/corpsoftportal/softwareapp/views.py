@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
 from softwareapp.forms import CategoryCreateForm, SofwareCreateForm, TransferCreateForm
-from warehouseapp.models import Warehouse
+from warehouseapp.models import Warehouse, WarehouseType
 import json
 
 # Create your views here.
@@ -99,6 +99,13 @@ def transfer_create(request):
 @csrf_exempt
 def reciever(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        print(data)
+        data = json.loads(json.loads(request.body))
+        try:
+            host = Warehouse.objects.get(name=data['machine_name'])
+        except:
+            host = Warehouse(name=data['machine_name'], warehouse_type=WarehouseType.objects.get(id=2))
+            host.save()
+        print(data['username'])
+        print(data['soft'])
+
     return render(request, 'softwareapp/base.html', {})
