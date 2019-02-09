@@ -104,18 +104,13 @@ def transfer_create(request):
 def reciever(request):
     if request.method == "POST":
         data = json.loads(json.loads(request.body))
-        try:
-            host = Warehouse.objects.get(name=data['machine_name'])
-        except:
+        if not Warehouse.objects.get(name=data['machine_name']).exists():
             host = Warehouse(name=data['machine_name'], warehouse_type=WarehouseType.objects.get(id=2))
             host.save()
-        print(data['username'])
-        # print(data['soft'])
+
         for software in data['soft']:
-            try:
-                software_name = Software.objects.get(name=software['DisplayName'],
-                                                     owner_id=Warehouse.objects.get(name=data['machine_name']))
-            except:
+            if not Software.objects.get(name=software['DisplayName'],
+                                        owner_id=Warehouse.objects.get(name=data['machine_name'])).exists():
                 if software['DisplayName'] == '':
                     continue
                 software_name = Software(name=software['DisplayName'],
