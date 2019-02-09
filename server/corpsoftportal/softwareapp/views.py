@@ -11,9 +11,12 @@ import json
 
 
 def main(request):
-    unclassifed = Software.objects.filter(owner=3)
+    unknown_owner = Software.objects.filter(owner=Warehouse.objects.get(name='Нераспределенное ПО').id)
+    unknown_category = Software.objects.filter(category=Category.objects.get(name='Unknown').id)
+
     content = {
-        'unclassifed': unclassifed,
+        'unknown_owner': unknown_owner,
+        'unknown_category': unknown_category
     }
     return render(request, 'softwareapp/base.html', content)
 
