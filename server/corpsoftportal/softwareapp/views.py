@@ -11,6 +11,11 @@ import json
 
 
 def main(request):
+    # temp_name = 'Python 3.7.2 Utility Scripts (32-bit)'
+    # if Software.objects.filter(name=temp_name).exists():
+    #     soft = Software.objects.filter(name=temp_name)
+    #     category = soft.values_list('category_id', flat=True).distinct()
+    #     print(category.values_list())
     unknown_owner = Software.objects.filter(owner=Warehouse.objects.get(name='Нераспределенное ПО').id)
     unknown_category = Software.objects.filter(category=Category.objects.get(name='Unknown').id)
 
@@ -130,7 +135,13 @@ def software_details(request, software_id):
     if request.method == "POST":
         form = SofwareForm(request.POST, instance=instance)
         if form.is_valid():
-            pass
+            instance.category_id = Category.objects.get(id=request.POST['category'])
+            instance.license_term = LicenseTerm.objects.get(id=request.POST['license_term'])
+            instance.owner = Warehouse.objects.get(id=request.POST['owner'])
+            instance.license_key = request.POST['license_key']
+            instance.save()
+            return HttpResponseRedirect(reverse('softwareapp:main'))
+
     else:
         form = SofwareForm(instance=instance)
 
