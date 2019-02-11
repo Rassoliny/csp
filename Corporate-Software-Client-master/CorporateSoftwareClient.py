@@ -4,8 +4,10 @@ import platform
 import os
 import json
 import requests
-URL = 'xxx.xxx.xxx.xxx'
-PORT = 'xxxx'
+PROTOCOL = 'http'
+IP = '127.0.0.1'
+PORT = '8000'
+URL = 'reciever'
 
 class Client(metaclass=abc.ABCMeta):
 
@@ -48,11 +50,11 @@ class ClientWin10x64(Client):
         json_for_send = {'OS': self.os, 'machine_name': self.machine_name, 'username': self.username, 'soft': self.soft}
         json_for_send = json.dumps(json_for_send)
         # Это я не протестил джангу не поднял пока...
-        r = requests.post('{}:{}'.format(URL, PORT), json=json_for_send)
+        r = requests.post('{}://{}:{}/{}'.format(PROTOCOL, IP, PORT, URL), json=json_for_send)
 
 
 # Ну и в идеале это должно работать...
-# ClientWin10x64().send_json_info()
+ClientWin10x64().send_json_info()
 
 
 

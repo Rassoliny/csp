@@ -1,0 +1,22 @@
+{% extends 'softwareapp/base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block inc_menu %}
+    {% include 'softwareapp/includes/inc_menu_soft_catalog.html' %}
+{% endblock %}
+
+
+{% block content %}
+<h2>Изменение {{ itm.name }}</h2>
+    <form class="form-horizontal" action="{% url 'softwareapp:software_details' itm.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input class="form-control" type="submit" value="Сохранить">
+    </form>
+{% endblock %}

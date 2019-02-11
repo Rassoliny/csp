@@ -13,13 +13,13 @@ class CategoryCreateForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
-class SofwareCreateForm(forms.ModelForm):
+class SofwareForm(forms.ModelForm):
     class Meta:
         model = Software
-        fields = ('name', 'category', 'license_term', 'owner','license_key')
+        fields = ('name', 'category', 'license_term', 'owner', 'license_key')
 
     def __init__(self, *args, **kwargs):
-        super(SofwareCreateForm, self).__init__(*args, **kwargs)
+        super(SofwareForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 

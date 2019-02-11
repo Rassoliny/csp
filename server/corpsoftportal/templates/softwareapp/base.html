@@ -24,16 +24,34 @@
     {% block content %}
         <h2>Проблемы</h2>
         Список полученного платного ПО, который не назначен для установки на указанный компьютер
-        <h2>Нужно классифицировать</h2>
         <div class="product_catalog">
-
-            <ul>
-                {% for itm in unclassifed %}
-                <li>
-                        {{ itm.name }}
-                </li>
+        <h2>Требуется проставить владельца</h2>
+            <table class="output">
+                <tr>
+                   <td>Softname</td>
+                </tr>
+                {% for itm in unknown_owner %}
+                <tr>
+                   <td>{{ itm.name }}</td>
+                </tr>
                 {% endfor %}
-            </ul>
+            </table>
+
+        <h2>Требуется классифицировать</h2>
+            <table class="output">
+                <tr>
+                   <td>Softname ID</td>
+                   <td>Softname</td>
+                   <td>Owner</td>
+               </tr>
+                {% for itm in unknown_category %}
+                <tr>
+                   <td class="id"><a href="{% url 'softwareapp:software_details' itm.id %}">{{ itm.id }}</a></td>
+                   <td>{{ itm.name }}</td>
+                   <td>{{ itm.owner }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
         {% endblock %}
     </div>

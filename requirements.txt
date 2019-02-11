@@ -1,4 +1,5 @@
 django
-win32com
+requests
 wmi
+pywin32
 winreg
