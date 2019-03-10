@@ -27,12 +27,10 @@ def main(request):
 
 
 def catalog_soft(request):
-    categories = Software.objects.all()
-    software = Software.objects.all()
+    categories = Category.objects.all()
 
     content = {
-        'categories': categories,
-        'software': software
+        'categories': categories
     }
 
     return render(request, 'softwareapp/catalog_soft.html', content)
@@ -150,3 +148,14 @@ def software_details(request, software_id):
         'form': form
     }
     return render(request, 'softwareapp/detail.html', content)
+
+
+def category_details(request, category_name):
+    soft = Software.objects.filter(category=Category.objects.get(name=category_name))
+    print(Category.objects.get(name=category_name).id)
+    print(soft)
+    content = {
+        'soft': soft,
+        'category': category_name
+    }
+    return render(request, 'softwareapp/category_detail.html', content)

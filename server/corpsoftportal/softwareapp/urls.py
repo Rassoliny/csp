@@ -10,5 +10,6 @@ urlpatterns = [
     path('transfer_creation', sofwareapp.transfer_create, name='transfer_creation'),
     path('reciever', sofwareapp.reciever, name='reciever'),
     path('software_details/<int:software_id>', sofwareapp.software_details, name='software_details'),
+    path('category_details/<str:category_name>', sofwareapp.category_details, name='category_details'),
     path('', sofwareapp.main, name='main'),
 ]

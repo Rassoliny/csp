@@ -5,7 +5,7 @@
 
 
 {% block page_title %}
-Каталог софта
+{{ category }}
 {% endblock %}
 
 {% block inc_menu %}
@@ -14,15 +14,16 @@
 
 
 {% block content %}
-<h2>Категории софта</h2>
+
+<h2>Софт в категории {{ category }}</h2>
 
 <div class="product_catalog">
 
             <ul>
-                {% for itm in categories %}
+                {% for itm in soft %}
 
                 <li>
-                    <a href="{% url 'softwareapp:category_details' itm.name %}">{{ itm.name }}</a>
+                        {{ itm.name }}
                 </li>
                 {% endfor %}
 
