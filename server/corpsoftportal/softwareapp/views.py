@@ -11,11 +11,8 @@ import json
 
 
 def main(request):
-    # temp_name = 'Python 3.7.2 Utility Scripts (32-bit)'
-    # if Software.objects.filter(name=temp_name).exists():
-    #     soft = Software.objects.filter(name=temp_name)
-    #     category = soft.values_list('category_id', flat=True).distinct()
-    #     print(category.values_list())
+    """Основная страница
+    Выводится список проблем, на которые стоит обратить внимание"""
     unknown_owner = Software.objects.filter(owner=Warehouse.objects.get(name='Нераспределенное ПО').id)
     unknown_category = Software.objects.filter(category=Category.objects.get(name='Unknown').id)
 
@@ -27,6 +24,7 @@ def main(request):
 
 
 def catalog_soft(request):
+    """Страница каталога"""
     categories = Category.objects.all()
 
     content = {
@@ -105,6 +103,9 @@ def transfer_create(request):
 
 @csrf_exempt
 def reciever(request):
+    """Обработчик данных с хостов
+    После приема данных требуется вручную расставить категории.
+    После создания каталога софта эта проблема уйдет"""
     if request.method == "POST":
         data = json.loads(json.loads(request.body))
         if not Warehouse.objects.get(name=data['machine_name']).exists():
@@ -126,6 +127,7 @@ def reciever(request):
 
 
 def software_details(request, software_id):
+    """Изменение записи софта"""
     instance = Software.objects.get(id=software_id)
 
     #Вывод формы для редактирования
@@ -150,6 +152,7 @@ def software_details(request, software_id):
 
 
 def category_details(request, category_name):
+    """Каталог софта внутри категории"""
     soft = Software.objects.filter(category=Category.objects.get(name=category_name))
     content = {
         'soft': soft,
@@ -159,16 +162,21 @@ def category_details(request, category_name):
 
 
 def check_warehouse(request):
+    """Форма поиска склада"""
     form = SearchWarehouseForm()
     return render(request, 'softwareapp/check_warehouse.html', {'form': form})
 
 
 def get_warehouse(request):
+    """Список софта на указанном складе"""
     warehouse = request.POST['warehouse']
-    soft = Software.objects.filter(owner=Warehouse.objects.get(name=warehouse))
-    content = {
-        'soft': soft,
-        'category': warehouse
-    }
-    return render(request, 'softwareapp/category_detail.html', content)
+    try:
+        soft = Software.objects.filter(owner=Warehouse.objects.get(name=warehouse))
+        content = {
+            'soft': soft,
+            'category': warehouse
+        }
+        return render(request, 'softwareapp/category_detail.html', content)
+    except:
+        return HttpResponseRedirect(reverse('softwareapp:check_warehouse'))
 
