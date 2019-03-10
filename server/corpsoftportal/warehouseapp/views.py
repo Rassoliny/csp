@@ -15,8 +15,6 @@ def warehouse_create(request):
     if request.method == "POST":
         form = WarehouseCreateForm(request.POST)
         if form.is_valid():
-            print(request.POST['name'])
-            print(request.POST['warehouse_type'])
             warehouse = Warehouse(name=request.POST['name'], warehouse_type=WarehouseType.objects.get(id=request.POST['warehouse_type']))
             warehouse.save()
             return HttpResponseRedirect(reverse('warehouseapp:main'))

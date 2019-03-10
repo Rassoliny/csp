@@ -35,3 +35,7 @@ class TransferCreateForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 
+class SearchWarehouseForm(forms.Form):
+    warehouse = forms.CharField(label='Введите имя компьютера')
+
+

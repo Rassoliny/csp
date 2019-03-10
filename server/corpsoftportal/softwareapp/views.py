@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
-from softwareapp.forms import CategoryCreateForm, SofwareForm, TransferCreateForm
+from softwareapp.forms import CategoryCreateForm, SofwareForm, TransferCreateForm, SearchWarehouseForm
 from warehouseapp.models import Warehouse, WarehouseType
 import json
 
@@ -126,7 +126,6 @@ def reciever(request):
 
 
 def software_details(request, software_id):
-    """Вывод полной информации об ящике"""
     instance = Software.objects.get(id=software_id)
 
     #Вывод формы для редактирования
@@ -152,10 +151,24 @@ def software_details(request, software_id):
 
 def category_details(request, category_name):
     soft = Software.objects.filter(category=Category.objects.get(name=category_name))
-    print(Category.objects.get(name=category_name).id)
-    print(soft)
     content = {
         'soft': soft,
         'category': category_name
     }
     return render(request, 'softwareapp/category_detail.html', content)
+
+
+def check_warehouse(request):
+    form = SearchWarehouseForm()
+    return render(request, 'softwareapp/check_warehouse.html', {'form': form})
+
+
+def get_warehouse(request):
+    warehouse = request.POST['warehouse']
+    soft = Software.objects.filter(owner=Warehouse.objects.get(name=warehouse))
+    content = {
+        'soft': soft,
+        'category': warehouse
+    }
+    return render(request, 'softwareapp/category_detail.html', content)
+

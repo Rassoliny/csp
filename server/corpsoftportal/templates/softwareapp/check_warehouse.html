@@ -1,0 +1,22 @@
+{% extends 'softwareapp/base.html' %}
+
+
+{% load static %}
+
+
+{% block page_title %}
+Поиск
+{% endblock %}
+
+{% block inc_menu %}
+    {% include 'softwareapp/includes/inc_menu_soft_catalog.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<form  class="form-horizontal" action="{% url 'softwareapp:get_warehouse'  %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+{% endblock %}

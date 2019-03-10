@@ -11,5 +11,7 @@ urlpatterns = [
     path('reciever', sofwareapp.reciever, name='reciever'),
     path('software_details/<int:software_id>', sofwareapp.software_details, name='software_details'),
     path('category_details/<str:category_name>', sofwareapp.category_details, name='category_details'),
+    path('check_warehouse', sofwareapp.check_warehouse, name='check_warehouse'),
+    path('get_warehouse', sofwareapp.get_warehouse, name='get_warehouse'),
     path('', sofwareapp.main, name='main'),
 ]
