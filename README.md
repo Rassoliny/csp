@@ -11,6 +11,8 @@ pip install -r requirements
 Иногда зависимости сразу не устанавливаются - эта проблема будет решена созданием полноценного инсталлятора
 
 Для демонстрации работы проекта достаточно запустить сервер и клиент на одном и том же хосте на ОС Windows
+В демо варианте используется база sqlite3, в которой создан пользователь admin с паролем admin
+
 
 <h5>Запуск сервера</h5>
 python csp/server/corpsoftportal/manage.py runserver 
@@ -32,3 +34,4 @@ csp/Corporate-Software-Client-master/CorporateSoftwareClient.py
 <h5>Антентификация через AD</h5>
 Проект поддерживает аутентификацию через AD последством django-python3-ldap
 Для ее настройки требуется расскоментировать настройки django-python3-ldap в csp/server/corpsoftportal/corpsoftportal/settings.py
+
