@@ -13,7 +13,7 @@
 	margin: auto 0px;
 	position: relative;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 .links-menu li {
