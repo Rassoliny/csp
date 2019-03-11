@@ -12,10 +12,8 @@
 .links-menu {
 	margin: auto 0px;
 	position: relative;
-}
-
-.links-menu ul{
 	display: flex;
+	justify-content: space-between;
 }
 
 .links-menu li {

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'softwareapp',
     'warehouseapp',
     # 'django-python3-ldap',
+    'authapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

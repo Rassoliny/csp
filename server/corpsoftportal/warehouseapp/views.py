@@ -1,14 +1,17 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from warehouseapp.models import Warehouse, WarehouseType
 from warehouseapp.forms import WarehouseCreateForm
 # Create your views here.
 
 
+@login_required
 def main(request):
     return render(request, 'warehouseapp/base.html', {})
 
 
+@login_required
 def warehouse_create(request):
     title = 'Создание склада'
     # Вывод формы для редактирования

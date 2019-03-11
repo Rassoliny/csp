@@ -1,0 +1,12 @@
+{%  extends 'softwareapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'authapp:login' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <br>
+        <input class="form-control" type="submit" value="Войти">
+    </form>
+
+{% endblock %}

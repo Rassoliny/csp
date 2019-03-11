@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from softwareapp.models import Category, LicenseType, Software, LicenseTerm, Transfer
 from softwareapp.forms import CategoryCreateForm, SofwareForm, TransferCreateForm, SearchWarehouseForm
 from warehouseapp.models import Warehouse, WarehouseType
@@ -9,7 +10,7 @@ import json
 
 # Create your views here.
 
-
+@login_required
 def main(request):
     """Основная страница
     Выводится список проблем, на которые стоит обратить внимание"""
@@ -23,6 +24,7 @@ def main(request):
     return render(request, 'softwareapp/base.html', content)
 
 
+@login_required
 def catalog_soft(request):
     """Страница каталога"""
     categories = Category.objects.all()
@@ -34,6 +36,7 @@ def catalog_soft(request):
     return render(request, 'softwareapp/catalog_soft.html', content)
 
 
+@login_required
 def category_create(request):
     title = 'Создание категории'
     # Вывод формы для редактирования
@@ -55,6 +58,7 @@ def category_create(request):
     return render(request, 'softwareapp/category_creation.html', content)
 
 
+@login_required
 def software_create(request):
     title = 'Создание категории'
     # Вывод формы для редактирования
@@ -79,6 +83,7 @@ def software_create(request):
     return render(request, 'softwareapp/software_creation.html', content)
 
 
+@login_required
 def transfer_create(request):
     title = 'Проводка'
     # Вывод формы для редактирования
@@ -151,6 +156,7 @@ def software_details(request, software_id):
     return render(request, 'softwareapp/detail.html', content)
 
 
+@login_required
 def category_details(request, category_name):
     """Каталог софта внутри категории"""
     soft = Software.objects.filter(category=Category.objects.get(name=category_name))
@@ -161,12 +167,14 @@ def category_details(request, category_name):
     return render(request, 'softwareapp/category_detail.html', content)
 
 
+@login_required
 def check_warehouse(request):
     """Форма поиска склада"""
     form = SearchWarehouseForm()
     return render(request, 'softwareapp/check_warehouse.html', {'form': form})
 
 
+@login_required
 def get_warehouse(request):
     """Список софта на указанном складе"""
     warehouse = request.POST['warehouse']
