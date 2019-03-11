@@ -174,7 +174,7 @@ def check_warehouse(request):
     return render(request, 'softwareapp/check_warehouse.html', {'form': form})
 
 
-@login_required
+# @login_required
 def get_warehouse(request):
     """Список софта на указанном складе"""
     warehouse = request.POST['warehouse']

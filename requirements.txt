@@ -3,3 +3,4 @@ requests
 wmi
 pywin32
 winreg
+django-python3-ldap
