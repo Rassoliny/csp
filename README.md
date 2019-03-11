@@ -26,5 +26,9 @@ csp/Corporate-Software-Client-master/CorporateSoftwareClient.py
 <li>IP = '127.0.0.1'</li>
 <li>PORT = '8000'</li>
 <li>URL = 'reciever'</li>
-</ul
+</ul>
 
+
+<h5>Антентификация через AD</h5>
+Проект поддерживает аутентификацию через AD последством django-python3-ldap
+Для ее настройки требуется расскоментировать настройки django-python3-ldap в csp/server/corpsoftportal/corpsoftportal/settings.py
